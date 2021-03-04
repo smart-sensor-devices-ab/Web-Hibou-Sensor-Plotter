@@ -367,17 +367,14 @@ async function readLoop() {
       }
       
       let lineValueArray = value.split(" ");
-      if(!rightDevice) { // The advdata is spread on two lines, the first identifies it,
         if (lineValueArray[0] ===   localStorage.getItem("selectedDevice") && lineValueArray[3] === "[ADV]:") {
-          rightDevice = true;
           //console.log("CONSOLE.LOG= "+value);
-        }
-      } else if (rightDevice) { // Second line contains the actual advdata string we need to parse
-        scannedSensorData = parseSensorData(lineValueArray[1]);
+        
+      // Second line contains the actual advdata string we need to parse
+        scannedSensorData = parseSensorData(lineValueArray[4]);
         log.textContent = "\n" + "SensorData= " + JSON.stringify(scannedSensorData) + "\n";
 //console.log(scannedSensorData.p)
         //console.log("CONSOLE.LOG= "+value);
-        rightDevice = false;
       }
 
     }
